@@ -1,15 +1,15 @@
-import { Table, Button, Row, Col } from "react-bootstrap";
-import { FaEdit, FaPlus, FaTrash } from "react-icons/fa";
-import { Link, useParams } from "react-router-dom";
-import Message from "../../components/Message";
-import Loader from "../../components/Loader";
-import Paginate from "../../components/Paginate";
+import { Table, Button, Row, Col } from 'react-bootstrap';
+import { FaEdit, FaPlus, FaTrash } from 'react-icons/fa';
+import { Link, useParams } from 'react-router-dom';
+import Message from '../../components/Message';
+import Loader from '../../components/Loader';
+import Paginate from '../../components/Paginate';
 import {
   useGetEventsQuery,
   useDeleteEventMutation,
   useCreateEventMutation,
-} from "../../slices/eventsApiSlice";
-import { toast } from "react-toastify";
+} from '../../slices/eventsApiSlice';
+import { toast } from 'react-toastify';
 
 const EventListScreen = () => {
   const { pageNumber } = useParams();
@@ -18,10 +18,11 @@ const EventListScreen = () => {
     pageNumber,
   });
 
-  const [deleteEvent, { isLoading: loadingDelete }] = useDeleteEventMutation();
+  const [deleteEvent, { isLoading: loadingDelete }] =
+    useDeleteEventMutation();
 
   const deleteHandler = async (id) => {
-    if (window.confirm("Are you sure")) {
+    if (window.confirm('Are you sure')) {
       try {
         await deleteEvent(id);
         refetch();
@@ -31,10 +32,11 @@ const EventListScreen = () => {
     }
   };
 
-  const [createEvent, { isLoading: loadingCreate }] = useCreateEventMutation();
+  const [createEvent, { isLoading: loadingCreate }] =
+    useCreateEventMutation();
 
   const createEventHandler = async () => {
-    if (window.confirm("Are you sure you want to create a new event?")) {
+    if (window.confirm('Are you sure you want to create a new event?')) {
       try {
         await createEvent();
         refetch();
@@ -49,12 +51,12 @@ const EventListScreen = () => {
   const pages = data?.pages || 1;
   return (
     <>
-      <Row className="align-items-center">
+      <Row className='align-items-center'>
         <Col>
           <h1>Event</h1>
         </Col>
-        <Col className="text-end">
-          <Button className="my-3" onClick={createEventHandler}>
+        <Col className='text-end'>
+          <Button className='my-3' onClick={createEventHandler}>
             <FaPlus /> Create Product
           </Button>
         </Col>
@@ -65,10 +67,10 @@ const EventListScreen = () => {
       {isLoading ? (
         <Loader />
       ) : error ? (
-        <Message variant="danger">{error.data.message}</Message>
+        <Message variant='danger'>{error.data.message}</Message>
       ) : (
         <>
-          <Table striped bordered hover responsive className="table-sm">
+          <Table striped bordered hover responsive className='table-sm'>
             <thead>
               <tr>
                 <th>ID</th>
@@ -92,17 +94,17 @@ const EventListScreen = () => {
                     <Button
                       as={Link}
                       to={`/admin/event/${event._id}/edit`}
-                      variant="light"
-                      className="btn-sm mx-2"
+                      variant='light'
+                      className='btn-sm mx-2'
                     >
                       <FaEdit />
                     </Button>
                     <Button
-                      variant="danger"
-                      className="btn-sm"
+                      variant='danger'
+                      className='btn-sm'
                       onClick={() => deleteHandler(event._id)}
                     >
-                      <FaTrash style={{ color: "white" }} />
+                      <FaTrash style={{ color: 'white' }} />
                     </Button>
                   </td>
                 </tr>
@@ -112,6 +114,7 @@ const EventListScreen = () => {
           <Paginate pages={pages} page={page} isAdmin={true} />
         </>
       )}
+
     </>
   );
 };
