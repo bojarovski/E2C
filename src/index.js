@@ -9,8 +9,8 @@ import {
 import { Provider } from "react-redux";
 import store from "./store.js";
 // import 'bootstrap/dist/css/bootstrap.min.css';
-import "./assets/styles/bootstrap.custom.css";
-import "./assets/styles/index.css";
+import "./asset/styles/bootstrap.custom.css";
+import "./asset/styles/index.css";
 import App from "./App";
 import { HelmetProvider } from "react-helmet-async";
 import reportWebVitals from "./reportWebVitals";
